@@ -207,5 +207,10 @@ runs:
 
     - shell: bash
       run: |
+        echo "Copy wheels from the container"
+        docker cp "${{ inputs.name }}:/tmp/" "${{ steps.options.outputs.path }}/output"
+        
+    - shell: bash
+      run: |
         docker rm -f "${{ inputs.name }}"
         exit ${{ steps.build.outputs.return_val }}
